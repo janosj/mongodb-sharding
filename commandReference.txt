@@ -1,0 +1,5 @@
+# List number of chunks per shard, and chunk size
+# See here: https://docs.mongodb.com/manual/reference/method/db.collection.getShardDistribution/
+use shardDB
+db.people.getShardDistribution()
+
