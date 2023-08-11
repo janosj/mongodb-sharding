@@ -1,5 +1,5 @@
 # Sharding a Time Series Collection:
-# https://www.mongodb.com/docs/manual/core/timeseries/timeseries-shard-collection/
+# https://www.mongodb.com/docs/manual/core/timeseries/timeseries-shard-collection/#shard-a-new-time-series-collection
 
 source ./demo.conf
 
