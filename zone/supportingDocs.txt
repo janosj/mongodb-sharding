@@ -1,0 +1,10 @@
+Starting point: "Segmenting Data by Location"
+https://www.mongodb.com/docs/manual/tutorial/sharding-segmenting-data-by-location/
+
+That tutorial apparently misses a required step, sharding the collection. See here:
+See here: https://www.mongodb.com/docs/manual/tutorial/deploy-shard-cluster/#shard-a-collection
+
+Enabling sharding on the database is no longer required. See here (5.0 docs):
+https://www.mongodb.com/docs/v5.0/tutorial/deploy-shard-cluster/#enable-sharding-for-a-database
+
+

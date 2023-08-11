@@ -1,0 +1,30 @@
+# mongo connect string (for the mongos)
+MONGOS_URI="mongodb://localhost:27021"
+
+# These MUST match your environment.
+SHARD0=myShard_0
+SHARD1=myShard_1
+
+DB=zoneDB
+COLL=sensorData
+
+#
+# Configuration Summary
+#
+# Document model (supports both TS and regular collections):
+# {
+#   metadata: {
+#     site: "site1|site2",
+#     sensorID: <string>
+#   },
+#   timestamp: <date>,
+#   reading: <number>
+# }
+#
+# Shard Key: { metadata.site, metadata.sensorID }
+#
+# 2 Zones:   US, WORLD
+#            site1 is mapped to US,
+#            site2 is mapped to WORLD
+#
+
