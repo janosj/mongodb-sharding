@@ -1,4 +1,4 @@
-source demo.conf
+source ./demo.conf
 echo "Using database $DB."
 
 echo

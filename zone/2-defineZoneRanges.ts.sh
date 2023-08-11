@@ -1,4 +1,4 @@
-source demo.conf
+source ./demo.conf
 
 echo
 echo "Defining Zone Ranges... "
@@ -6,6 +6,9 @@ echo
 
 mongosh $MONGOS_URI --eval "
 
+  // Note the differences here: 
+  //   1) the user-facing collection is replaced by the underlying bucket.
+  //   2) 'meta' replaces 'metadata', based on the underlying bucket schema.
   var data = sh.addTagRange( '$DB.system.buckets.$COLL', 
                              { 'meta.site': 'site1', 'meta.sensorID': MinKey },
                              { 'meta.site': 'site1', 'meta.sensorID': MaxKey },
@@ -19,7 +22,8 @@ mongosh $MONGOS_URI --eval "
     throw new Error('US zone range was NOT created successfully!');
   }
   console.log();
-                 
+  
+  // Note the differences (see above).
   data = sh.addTagRange( '$DB.system.buckets.$COLL', 
                          { 'meta.site': 'site2', 'meta.sensorID': MinKey },
                          { 'meta.site': 'site2', 'meta.sensorID': MaxKey },

@@ -1,4 +1,4 @@
-source demo.conf
+source ./demo.conf
 
 echo
 echo "Mapping Shards to Zones (via tags)... "

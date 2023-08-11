@@ -1,4 +1,4 @@
-source demo.conf
+source ./demo.conf
 
 echo
 echo "Defining Zone Ranges... "
