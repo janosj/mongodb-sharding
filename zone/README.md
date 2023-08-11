@@ -20,7 +20,7 @@ Update `demo.conf` with your MongoDB connect string (to the mongos). Additionall
 
 Any type of data or application can utilize zone sharding, as long as the incoming data contains some field and accompanying rule to direct the write to the appropriate zone. If the data contains a time value, it may be a candidate to be stored in a MongoDB Time Series Collection. For more information about Time Series Collections, see [here](https://www.mongodb.com/docs/manual/core/timeseries-collections/). 
 
-Time Series Collections have certain structural requirements. The data format used by the `insertData.sh` script was specifically designed with these requirements in mind, and so when you run the script you can choose whether to store the data in a regular collection or a time series collection. Time Series Collections do support zone sharding, but some of configuration steps need to be tailored. When runnning `defineZoneRanges` and `shardCollection`, use *either* the regular version or the time series version. 
+Time Series Collections have certain structural requirements. The data format used by the `insertData.sh` script was specifically designed with these requirements in mind, so you can choose which type of collection you want to use. Time Series Collections do support zone sharding, but some configuration steps need to be tailored. When runnning `defineZoneRanges` and `shardCollection`, use *either* the regular version or the time series version. 
 
 ### 3. Execute the scripts and validate the results
 
