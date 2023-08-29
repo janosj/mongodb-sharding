@@ -28,5 +28,11 @@ Execute the scripts in sequence to tag the shards with zone labels, map data val
 
 ## MongoDB Atlas
 
-If using Atlas, use the Atlas UI rather than the scripts provided here. MongoDB Atlas supports Global Clusters with multiple zones and multiple shards per zone. Zones and associated tags are configured during cluster deployment. You then define (also through the Atlas UI) a compound shard key to shard the collection. The first shard key field is a mandatory document attribute ('location') that is used to map documents to a corresponding zone. The second shard key field is user-defined. After sharding the collection, Atlas provides a table of location values and corresponding zones (also available [here](https://cloud.mongodb.com/static/atlas/country_iso_codes.txt)).
+If using MongoDB Atlas, you can use the scripts provided here in conjunction with a (2 shard) sharded Atlas cluster. Alternatively, however, Atlas also supports Global Clusters with multiple zones and multiple shards per zone: 
 
+- Zones and associated tags are configured during cluster deployment. 
+- You then define (also through the Atlas UI) a compound shard key to shard the collection. 
+- The first shard key field is a mandatory document attribute ('location') that is used to map documents to a corresponding zone. After sharding the collection, Atlas provides a table of location values and corresponding zones (also available [here](https://cloud.mongodb.com/static/atlas/country_iso_codes.txt)).
+- The second shard key field is user-defined. 
+
+If using an Atlas Global Cluster, perform the necessary zone setup steps using the Atlas UI, rather than the scripts provided here. `insertDataAtlas.sh` can then be used to generate some minimal test data. To inspect this data, connect to the individual shards. Note that the --tls setting is required (see [here](https://kb.corp.mongodb.com/article/000021064)).
