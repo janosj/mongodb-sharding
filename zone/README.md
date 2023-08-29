@@ -6,7 +6,7 @@ Zone Sharding is covered [here](https://www.mongodb.com/docs/manual/core/zone-sh
 
 ## Prerequisites
 
-- A MongoDB sharded cluster with 2 shards. These scripts establish two zones, `US` and `WORLD`, mapping a single shard to each zone. This demo was written and tested using MongoDB 6.x. See notes below about using MongoDB Atlas.
+- A MongoDB sharded cluster with 2 shards. These scripts establish two zones, `US` and `WORLD`, mapping a single shard to each zone. This demo was written and tested using MongoDB 6.x. See notes below if using MongoDB Atlas.
 
 - Mongosh is required, to execute the scripts. 
 
@@ -28,6 +28,5 @@ Execute the scripts in sequence to tag the shards with zone labels, map data val
 
 ## MongoDB Atlas
 
-MongoDB Atlas supports Global Clusters with multiple zones and multiple shards per zone. Zones and associated tags are configured during cluster deployment. You then define (also through the Atlas UI) a compound shard key to shard the collection. The first shard key field is a mandatory document attribute ('location') that is used to map documents to a corresponding zone. The second shard key field is user-defined. After sharding the collection, Atlas provides a table of location values and corresponding zones (also available [here](https://cloud.mongodb.com/static/atlas/country_iso_codes.txt)).
+If using Atlas, use the Atlas UI rather than the scripts provided here (which won't work in Atlas). MongoDB Atlas supports Global Clusters with multiple zones and multiple shards per zone. Zones and associated tags are configured during cluster deployment. You then define (also through the Atlas UI) a compound shard key to shard the collection. The first shard key field is a mandatory document attribute ('location') that is used to map documents to a corresponding zone. The second shard key field is user-defined. After sharding the collection, Atlas provides a table of location values and corresponding zones (also available [here](https://cloud.mongodb.com/static/atlas/country_iso_codes.txt)).
 
-If using Atlas, use the Atlas UI rather than the scripts provided here (which won't work in Atlas). 
