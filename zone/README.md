@@ -6,7 +6,7 @@ Zone Sharding is covered [here](https://www.mongodb.com/docs/manual/core/zone-sh
 
 ## Prerequisites
 
-- A MongoDB sharded cluster with 2 shards. You can deploy such a cluster using either MongoDB Atlas or self-managed MongoDB. These scripts establish two zones, `US` and `WORLD`, mapping a single shard to each zone. This demo was written and tested using MongoDB 6.x.
+- A MongoDB sharded cluster with 2 shards. These scripts establish two zones, `US` and `WORLD`, mapping a single shard to each zone. This demo was written and tested using MongoDB 6.x. See notes below about using MongoDB Atlas.
 
 - Mongosh is required, to execute the scripts. 
 
@@ -26,3 +26,8 @@ Time Series Collections have certain structural requirements. The data format us
 
 Execute the scripts in sequence to tag the shards with zone labels, map data values to the zones, shard the document collection, and insert the test data. The test data is intentionally minimal - only two records are inserted, one for each zone. To query the complete data set, connect to the mongos (using *mongosh*) and query the entire collection. To verify that the data was routed as expected, attach to the individual shards and query the collection. When using Time Series Collections, note that the underlying collection on the individual shards is actually a system-created bucket collection and not the collection that was explicitly created (which is actually stored as a view). 
 
+## MongoDB Atlas
+
+MongoDB Atlas supports Global Clusters with multiple zones and multiple shards per zone. Zones and associated tags are configured during cluster deployment. You then define (also through the Atlas UI) a compound shard key to shard the collection. The first shard key field is a mandatory document attribute ('location') that is used to map documents to a corresponding zone. The second shard key field is user-defined. After sharding the collection, Atlas provides a table of location values and corresponding zones (also available [here](https://cloud.mongodb.com/static/atlas/country_iso_codes.txt)).
+
+If using Atlas, use the Atlas UI rather than the scripts provided here (which won't work in Atlas). 
