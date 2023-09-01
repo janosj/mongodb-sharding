@@ -2,11 +2,21 @@
 
 This collection of scripts illustrates how to configure zone sharding, for both regular and time series collections. Zone sharding is a way of applying tags (i.e. zones) to a subset of shards with a MongoDB Sharded Cluster, and directing writes to specific shards on the basis of those tags. It can be used to support a variety of use cases, including directing writes to local data centers or specialized hardware. 
 
+These scripts establish two zones, `US` and `WORLD`, on a two-shard Sharded Cluster, mapping a single shard to each zone.
+
 Zone Sharding is covered [here](https://www.mongodb.com/docs/manual/core/zone-sharding/) in the MongoDB docs. 
 
 ## Prerequisites
 
-- A MongoDB sharded cluster with 2 shards. These scripts establish two zones, `US` and `WORLD`, mapping a single shard to each zone. This demo was written and tested using MongoDB 6.x. See notes below if using MongoDB Atlas.
+- A MongoDB sharded cluster with 2 shards. There are many ways to deploy such a test cluster. You may want to consider using *mlaunch*, one of the utilities includes with *mtools* (see [here](https://rueckstiess.github.io/mtools/mlaunch.html)). The mlaunch command would resemble the following:
+
+```
+mlaunch --replicaset --nodes 1 --sharded 2 --config 1 --binarypath $HOME/.local/m/versions/6.0.6-ent/bin
+```
+
+This demo was written and tested using MongoDB 6.x. 
+
+See notes below if using MongoDB Atlas. 
 
 - Mongosh is required, to execute the scripts. 
 

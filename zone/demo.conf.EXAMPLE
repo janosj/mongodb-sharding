@@ -2,8 +2,8 @@
 MONGOS_URI="mongodb://localhost:27021"
 
 # These MUST match your environment.
-SHARD0=myShard_0
-SHARD1=myShard_1
+SHARD0=shard01
+SHARD1=shard02
 
 DB=zoneDB
 COLL=sensorData
