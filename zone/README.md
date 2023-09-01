@@ -8,15 +8,11 @@ Zone Sharding is covered [here](https://www.mongodb.com/docs/manual/core/zone-sh
 
 ## Prerequisites
 
-- A MongoDB sharded cluster with 2 shards. There are many ways to deploy such a test cluster. You may want to consider using *mlaunch*, one of the utilities includes with *mtools* (see [here](https://rueckstiess.github.io/mtools/mlaunch.html)). The mlaunch command would resemble the following:
+- A MongoDB sharded cluster with 2 shards. There are many ways to deploy such a test cluster. See notes below if using MongoDB Atlas. This demo was written and tested using a MongoDB 6.x sharded cluster deployed with *mlaunch*, one of the utilities includes with *mtools* (see [here](https://rueckstiess.github.io/mtools/mlaunch.html)). The mlaunch command resembles the following:
 
 ```
 mlaunch --replicaset --nodes 1 --sharded 2 --config 1 --binarypath $HOME/.local/m/versions/6.0.6-ent/bin
 ```
-
-This demo was written and tested using MongoDB 6.x. 
-
-See notes below if using MongoDB Atlas. 
 
 - Mongosh is required, to execute the scripts. 
 
