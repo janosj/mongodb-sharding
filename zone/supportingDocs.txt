@@ -18,7 +18,8 @@ For example, if site 2 is down:
   # Scatter-gather query fails:
   db.sensorData.find()
 
-  # Scatter-gather query on partial shard key fails:
+  # Scatter-gather query on partial shard key fails.
+  # Investigating whether this should be the case?
   db.sensorData.find( {"metadata.site": "site1"} )
 
   # Targeted query on site 1 succeeds:
