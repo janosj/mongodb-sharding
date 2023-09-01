@@ -6,13 +6,13 @@ Zone Sharding is covered [here](https://www.mongodb.com/docs/manual/core/zone-sh
 
 ## Prerequisites
 
-- These scripts establish two zones, `US` and `WORLD`, on a Sharded Cluster with two shards, mapping a single shard to each zone. There are many ways to deploy such a test cluster. See notes below if using MongoDB Atlas. Otherwise, you can deploy it locally. This demo was written and tested using a MongoDB 6.x sharded cluster deployed with *mlaunch*, one of the utilities included with *mtools* (see [here](https://rueckstiess.github.io/mtools/mlaunch.html)). Your *mlaunch* command should resemble the following:
+These scripts establish two zones, `US` and `WORLD`, on a Sharded Cluster with two shards, mapping a single shard to each zone. There are many ways to deploy such a test cluster. See notes below if using MongoDB Atlas. Otherwise, you can deploy it locally. This demo was written and tested using a MongoDB 6.x sharded cluster deployed with *mlaunch*, one of the utilities included with *mtools* (see [here](https://rueckstiess.github.io/mtools/mlaunch.html)). Your *mlaunch* command should resemble the following:
 
 ```
 mlaunch --replicaset --nodes 1 --sharded 2 --config 1 --binarypath $HOME/.local/m/versions/6.0.6-ent/bin
 ```
 
-- Mongosh is required, to execute the scripts. 
+Mongosh is also required, to execute the scripts. 
 
 ## Running the Demo
 
