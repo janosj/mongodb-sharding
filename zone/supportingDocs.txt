@@ -7,25 +7,3 @@ See here: https://www.mongodb.com/docs/manual/tutorial/deploy-shard-cluster/#sha
 Enabling sharding on the database is no longer required. See here (5.0 docs):
 https://www.mongodb.com/docs/v5.0/tutorial/deploy-shard-cluster/#enable-sharding-for-a-database
 
-Troubleshooting Sharded Clusters: All Members of a Shard Become Unavailable:
-https://www.mongodb.com/docs/manual/tutorial/troubleshoot-sharded-clusters/#all-members-of-a-shard-become-unavailable
-If zone 2 goes down, you can still query zone 1, *if* it's a targeted query.
-Generic scatter-gather queries will produce an error:
-"encountered non-retryable error during query: caused by: Could not find host matching read preference (mode: "primary") for set shard01".
-Queries targeted at the available shards (using the *full* compound shard key) will continue processing queries (including writes).
-For example, if site 2 is down:
-
-  # Scatter-gather query fails:
-  db.sensorData.find()
-
-  # Scatter-gather query on partial shard key fails.
-  # Investigating whether this should be the case?
-  db.sensorData.find( {"metadata.site": "site1"} )
-
-  # Targeted query on site 1 succeeds:
-  db.sensorData.find( {"metadata.site": "site1", "metadata.sensorID": "sensorABC"} )
-
-  # This option should also return results but currently does not:
-  # https://www.mongodb.com/docs/manual/reference/method/cursor.allowPartialResults/
-  db.sensorData.find( {"metadata.site": "site1"} ).allowPartialResults()
-
