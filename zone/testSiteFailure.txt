@@ -21,6 +21,8 @@ To test:
 
 4. Run queries to examine the data. For example, with site 2 down:
 
+     use zoneDB
+
      # A scatter-gather query fails:
      db.sensorData.find()
 
