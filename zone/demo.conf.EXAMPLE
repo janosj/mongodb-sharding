@@ -1,5 +1,5 @@
 # mongo connect string (for the mongos)
-MONGOS_URI="mongodb://localhost:27021"
+MONGOS_URI="mongodb://localhost:27017"
 
 # These MUST match your environment.
 SHARD0=shard01
