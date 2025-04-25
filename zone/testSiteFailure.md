@@ -1,7 +1,9 @@
 # Testing a Site Failure
 
-Note [here](https://www.mongodb.com/docs/manual/tutorial/troubleshoot-sharded-clusters/#all-members-of-a-shard-become-unavailable) in the docs ("Troubleshooting Sharded Clusters: All Members of a Shard Become Unavailable") that when a shard becomes unavailable, all the data in that shard becomes unavailable, but the data on the other shards remain available. Therefore, if zone 2 goes down you can still query zone 1. That's only true, however, *if* it's a targeted query. Generic scatter-gather queries will produce an error:
-"encountered non-retryable error during query: caused by: Could not find host matching read preference (mode: "primary") for set shard01".
+Note [here](https://www.mongodb.com/docs/manual/tutorial/troubleshoot-sharded-clusters/#all-members-of-a-shard-become-unavailable) in the docs ("Troubleshooting Sharded Clusters: All Members of a Shard Become Unavailable") that when a shard becomes unavailable, all the data in that shard becomes unavailable but the data on the other shards remains available. For example, if zone 2 goes down you should still be able to query zone 1. That's only true, however, *if* it's a targeted query. Non-targeted scatter-gather queries will produce an error:
+
+> encountered non-retryable error during query: caused by: Could not find host matching read preference (mode: "primary") for set shard01".
+
 Queries targeted at the available shards (using the *full* compound shard key) will continue processing queries (including writes).
 
 To test this behavior: 
