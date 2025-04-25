@@ -1,7 +1,11 @@
 # This is a better way to define the tag ranges than that provided in "defineZoneRanges.sh". 
 # This improved configuration allows queries using partial shard keys 
 # to continue functioning in the presence of a site failure.
-# See "testSiteFailure.md" for details.
+
+# See "testSiteFailure.md" for details, 
+# as well as SERVER-80914: https://jira.mongodb.org/browse/SERVER-80914.
+
+# Key point: the min range is inclusive and max range is exclusive of the value.
 
 # Note: remove any existing tag ranges before applying this configuration.
 
