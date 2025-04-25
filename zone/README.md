@@ -2,7 +2,13 @@
 
 This collection of scripts illustrates how to configure zone sharding, for both regular and time series collections. Zone sharding is a way of applying tags (i.e. zones) to a subset of shards with a MongoDB Sharded Cluster, and directing writes to specific shards on the basis of those tags. It can be used to support a variety of use cases, including directing writes to local data centers or specialized hardware. 
 
-Zone Sharding is covered [here](https://www.mongodb.com/docs/manual/core/zone-sharding/) in the MongoDB docs. 
+Zone Sharding is covered [here](https://www.mongodb.com/docs/manual/core/zone-sharding/) in the MongoDB docs. Other helpful documentation: 
+- Best starting point: "Segmenting Data by Location" [link](https://www.mongodb.com/docs/manual/tutorial/sharding-segmenting-data-by-location/)
+
+- That tutorial omits sharding the collection, a required step. See [here](https://www.mongodb.com/docs/manual/tutorial/deploy-shard-cluster/#shard-a-collection)
+
+- Enabling sharding on the database is no longer required. See [here](https://www.mongodb.com/docs/v5.0/tutorial/deploy-shard-cluster/#enable-sharding-for-a-database) in the 5.0 docs.
+
 
 ## Prerequisites
 
