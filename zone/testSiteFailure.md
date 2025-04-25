@@ -4,11 +4,11 @@ Note [here](https://www.mongodb.com/docs/manual/tutorial/troubleshoot-sharded-cl
 
 > encountered non-retryable error during query: caused by: Could not find host matching read preference (mode: "primary") for set shard01".
 
-Queries targeted at the available shards (using the *full* compound shard key) will continue processing queries (including writes).
+Queries targeted at the available shards *using the full compound shard key* will continue processing queries (including writes).
 
 To test this behavior: 
 
-1. Launch the cluster and perform all steps, up through loading the minimal sample data records. 
+1. Launch the cluster and perform all setup steps, up through loading the minimal sample data records. 
 
 2. Simulate a site failure: 
 ```
@@ -22,26 +22,26 @@ mongosh --port 27017
 
 4. Run queries to examine the data. For example, with site 2 down:
 ```
-     use zoneDB
+use zoneDB
 
-     # A scatter-gather query fails:
-     db.sensorData.find()
+# A scatter-gather query fails:
+db.sensorData.find()
 
-     # A scatter-gather query on partial shard key fails.
-     # Investigating whether this should be the case?
-     db.sensorData.find( {"metadata.site": "site1"} )
-
-     # A targeted query on site 1 succeeds:
-     db.sensorData.find( {"metadata.site": "site1", "metadata.sensorID": "sensorABC"} )
-
-     # This option should also return results but currently does not:
-     # https://www.mongodb.com/docs/manual/reference/method/cursor.allowPartialResults/
-     # https://jira.mongodb.org/browse/MONGOSH-1577
-     db.sensorData.find( {"metadata.site": "site1"} ).allowPartialResults()
+# A targeted query on site 1 using the full shard key succeeds:
+db.sensorData.find( {"metadata.site": "site1", "metadata.sensorID": "sensorABC"} )
 ```
 
 5. Recover the site and verify things are fully operational:
 ```
-     mlaunch start shard02
+mlaunch start shard02
 ```
+
+Targeted queries that use a partial shard key can also return partial data from any available shards, but care must be taken when defining the tag ranges. The ranges defined in `2-defineZoneRanges.sh`, which follows the [tutorial](https://www.mongodb.com/docs/manual/tutorial/sharding-segmenting-data-by-location/) ("Segmenting Data by Location"), will not work if you query the data using the zone only without also specifying a sensorID. You can verify this by killing zone 2 and then executing the following query: 
+```
+db.sensorData.find( {"metadata.site": "site1"} )
+```
+
+This query will succeed if you define the tag ranges provided in `defineZoneRanges.BETTER.sh`.
+
+This only applies to regular collections. With time series collections, the view definition is stored on the primary shard. If this shard becomes unavailable, no data can be returned. See [SERVER-80914](https://jira.mongodb.org/browse/SERVER-80914).
 
