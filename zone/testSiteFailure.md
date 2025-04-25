@@ -1,26 +1,25 @@
-To test a site failure:
+# Testing a Site Failure
 
-Troubleshooting Sharded Clusters: All Members of a Shard Become Unavailable:
-https://www.mongodb.com/docs/manual/tutorial/troubleshoot-sharded-clusters/#all-members-of-a-shard-become-unavailable
-If zone 2 goes down, you can still query zone 1, *if* it's a targeted query.
-Generic scatter-gather queries will produce an error:
+Note [here](https://www.mongodb.com/docs/manual/tutorial/troubleshoot-sharded-clusters/#all-members-of-a-shard-become-unavailable) in the docs ("Troubleshooting Sharded Clusters: All Members of a Shard Become Unavailable") that when a shard becomes unavailable, all the data in that shard becomes unavailable, but the data on the other shards remain available. Therefore, if zone 2 goes down you can still query zone 1. That's only true, however, *if* it's a targeted query. Generic scatter-gather queries will produce an error:
 "encountered non-retryable error during query: caused by: Could not find host matching read preference (mode: "primary") for set shard01".
 Queries targeted at the available shards (using the *full* compound shard key) will continue processing queries (including writes).
 
-To test: 
+To test this behavior: 
 
 1. Launch the cluster and perform all steps, up through loading the minimal sample data records. 
 
 2. Simulate a site failure: 
-
-     mlaunch kill shard02
+```
+mlaunch kill shard02
+````
 
 3. Log in to the mongosh:
-
-     mongosh --port 27017
+```
+mongosh --port 27017
+```
 
 4. Run queries to examine the data. For example, with site 2 down:
-
+```
      use zoneDB
 
      # A scatter-gather query fails:
@@ -37,9 +36,10 @@ To test:
      # https://www.mongodb.com/docs/manual/reference/method/cursor.allowPartialResults/
      # https://jira.mongodb.org/browse/MONGOSH-1577
      db.sensorData.find( {"metadata.site": "site1"} ).allowPartialResults()
+```
 
 5. Recover the site and verify things are fully operational:
-
+```
      mlaunch start shard02
-
+```
 
