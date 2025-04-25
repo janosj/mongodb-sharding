@@ -36,12 +36,12 @@ db.sensorData.find( {"metadata.site": "site1", "metadata.sensorID": "sensorABC"}
 mlaunch start shard02
 ```
 
-Targeted queries that use a partial shard key can also return partial data from any available shards, but care must be taken when defining the tag ranges. The ranges defined in `2-defineZoneRanges.sh`, which follows the [tutorial](https://www.mongodb.com/docs/manual/tutorial/sharding-segmenting-data-by-location/) ("Segmenting Data by Location"), will not work if you query the data using the zone only without also specifying a sensorID. You can verify this by killing zone 2 and then executing the following query: 
+Targeted queries that use a partial shard key can also return data from any available shards, but care must be taken when defining the tag ranges. The ranges defined in `2-defineZoneRanges.sh`, which follows the [tutorial](https://www.mongodb.com/docs/manual/tutorial/sharding-segmenting-data-by-location/) ("Segmenting Data by Location"), will not work if you query the data using the zone only without also specifying a sensorID. You can verify this by killing zone 2 and then executing the following query: 
 ```
 db.sensorData.find( {"metadata.site": "site1"} )
 ```
 
-This query will succeed if you define the tag ranges provided in `defineZoneRanges.BETTER.sh`.
+This query will succeed if you define the tag ranges as provided in `defineZoneRanges.BETTER.sh`.
 
 This only applies to regular collections. With time series collections, the view definition is stored on the primary shard. If this shard becomes unavailable, no data can be returned. See [SERVER-80914](https://jira.mongodb.org/browse/SERVER-80914).
 
